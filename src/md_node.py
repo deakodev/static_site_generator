@@ -1,6 +1,6 @@
 from enum import Enum
 
-class MarkdownType(Enum):
+class MdType(Enum):
     TEXT = "text"
     BOLD = "bold"
     ITALIC = "italic"
@@ -8,7 +8,7 @@ class MarkdownType(Enum):
     LINK = "link"
     IMAGE = "image"
 
-class MarkdownNode:
+class MdNode:
     def __init__(self, text, type, url = None):
         self.text = text
         self.type = type
@@ -18,4 +18,4 @@ class MarkdownNode:
         return self.text == other.text and self.type == other.type and self.url == other.url
 
     def __repr__(self):
-        return f"MarkdownNode({self.text}, {self.type.value}, {self.url})"
+        return f"MdNode({self.text}, {self.type.value}, {self.url})"
