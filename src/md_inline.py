@@ -52,7 +52,7 @@ def _md_block_to_html_parent_node(block):
             case BlockType.QUOTE:
                 pattern = r"^> (.+)"
                 items = re.findall(pattern, block, flags=re.MULTILINE)
-                block = "".join(f"\n{item}" for item in items)
+                block = "".join(f"{item}" for item in items)
             case BlockType.HEADING:
                 match = re.match(r"^(#+)", block)
                 tag = tag + str(len(match.group(1))) 
