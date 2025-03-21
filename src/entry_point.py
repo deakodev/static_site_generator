@@ -4,7 +4,7 @@ from page_gen import pages_generate
 from static_copy import directory_clear, directory_copy
 
 static_dir = "static/"
-public_dir = "docs/"
+public_dir = "public/"
 content_path = "content/"
 template_path = "template.html"
 

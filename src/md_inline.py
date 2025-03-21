@@ -7,8 +7,8 @@ md_regex_map = [
     { "type": MdType.BOLD, "symbol": "**", "pattern": r"\*\*(?:.*?)\*\*" },
     { "type": MdType.ITALIC, "symbol": "_", "pattern": r"\_(?:.*?)\_" },
     { "type": MdType.CODE, "symbol": "`", "pattern": r"\`(?:.*?)\`" },
-    { "type": MdType.LINK, "symbol": "", "pattern": r"(?<!!)\[(.*?)\]\((.*?)\)" },
-    { "type": MdType.IMAGE, "symbol": "!", "pattern": r"!\[(.*?)\]\((.*?)\)" }, 
+    { "type": MdType.LINK, "symbol": "", "pattern": r"(?<!!)\[(?:.*?)\]\((?:.*?)\)" },
+    { "type": MdType.IMAGE, "symbol": "!", "pattern": r"!\[(?:.*?)\]\((?:.*?)\)" } 
 ]
 
 def md_inline_to_html_node(md):
@@ -20,7 +20,7 @@ def md_inline_to_html_node(md):
     return ParentNode("div", html_nodes)
 
 def _md_inline_to_md_nodes(md):
-    patterns = "|".join(f"({item['pattern']})" for item in md_regex_map if item["pattern"] is not None)
+    patterns = "|".join(f"({item['pattern']})" for item in md_regex_map)
     md_split = re.split(patterns, md)
     md_split = [t for t in md_split if t]
     return list(map(_to_md_node, md_split))
@@ -50,7 +50,9 @@ def _md_block_to_html_parent_node(block):
     if type != BlockType.CODE:
         match type:
             case BlockType.QUOTE:
-                block = block.strip("> ").strip()
+                pattern = r"^> (.+)"
+                items = re.findall(pattern, block, flags=re.MULTILINE)
+                block = "".join(f"\n{item}" for item in items)
             case BlockType.HEADING:
                 match = re.match(r"^(#+)", block)
                 tag = tag + str(len(match.group(1))) 
