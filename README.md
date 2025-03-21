@@ -14,6 +14,8 @@ This is my ground-up implementation of a static site generator, built ansd inspi
 
 - **Generating a Site:**
 
+  Add your markdown files in the /content dir then run...
+
   Locally:
 
   ```bash
@@ -42,6 +44,7 @@ This is my ground-up implementation of a static site generator, built ansd inspi
 ├── src/             # Source code for the generator
 ├── scripts/         # Build locally or production, tests
 ├── template.html    # HTML template used for pages
+```
 
 ## Personal Reflection
 
@@ -61,4 +64,3 @@ This project is open source under the [MIT License](LICENSE).
 ## Acknowledgments
 
 A big thank you to Boot.dev for the guidance and inspiration throughout this project.
-```
