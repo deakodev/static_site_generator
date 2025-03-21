@@ -1,1 +1,1 @@
-python3 src/entry_point.py "https://github.com/deakodev/static_site_generator.git"
+python3 src/entry_point.py "https://deakodev.github.io/static_site_generator/"
