@@ -12,7 +12,7 @@ def md_title(md):
     else:
         raise Exception("failed to find md title!")
 
-def page_generate(template_path, src_path, dest_path):
+def page_generate(base_path, template_path, src_path, dest_path):
     print(f"Generating page from {src_path} to {dest_path} using {template_path}")
 
     with open(template_path, "r") as template_file:
@@ -27,6 +27,8 @@ def page_generate(template_path, src_path, dest_path):
 
     template = template.replace("{{ Title }}", title)
     template = template.replace("{{ Content }}", html)
+    template = template.replace(r"href=\"", f"href=\"{base_path}")
+    template = template.replace(r"src=\"", f"src=\"{base_path}")
 
     dest_dir = os.path.dirname(dest_path)
     os.makedirs(dest_dir, exist_ok=True)
@@ -34,13 +36,13 @@ def page_generate(template_path, src_path, dest_path):
     with open(dest_path, "w") as dest_file:
         dest_file.write(template)
         
-def pages_generate(template_path, src_dir, dest_dir):
+def pages_generate(base_path, template_path, src_dir, dest_dir):
     src_items = os.listdir(src_dir)
     for item in src_items:
         src_path = os.path.join(src_dir, item)
         dest_path = os.path.join(dest_dir, item)
         if os.path.isfile(src_path):
             dest_path = dest_path.replace(".md", ".html")
-            page_generate(template_path, src_path, dest_path)
+            page_generate(base_path, template_path, src_path, dest_path)
         else:
-            pages_generate(template_path, src_path, dest_path)
+            pages_generate(base_path, template_path, src_path, dest_path)

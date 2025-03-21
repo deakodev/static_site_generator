@@ -1,0 +1,1 @@
+python3 src/entry_point.py "https://github.com/deakodev/static_site_generator.git"
