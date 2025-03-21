@@ -1,8 +1,6 @@
 
 import os
-from pathlib import Path
 import re
-import shutil
 from md_inline import md_inline_to_html_node
 
 def md_title(md):
@@ -27,8 +25,8 @@ def page_generate(base_path, template_path, src_path, dest_path):
 
     template = template.replace("{{ Title }}", title)
     template = template.replace("{{ Content }}", html)
-    template = template.replace('href=/"', f'href="{base_path}')
-    template = template.replace('src=/"', f'src="{base_path}')
+    template = template.replace(f'href="/', f'href="{base_path}/')
+    template = template.replace(f'src="/', f'src="{base_path}/')
 
     dest_dir = os.path.dirname(dest_path)
     os.makedirs(dest_dir, exist_ok=True)
